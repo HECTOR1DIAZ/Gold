@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <style>
+        #container .box {
+            display: inline-block;
+            width: 23%;
+
+        }
+
+        .box {
+            display: inline-block;
+            border: 2px solid black;
+            width: 200px;
+            height: 165px;
+            background-color: rgb(238, 144, 149);
+            padding-right: 10px;
+            text-align: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 20px;
+            margin: 10px;
+            padding: 10px;
+
+        
+        }
+
+        .activities {
+            height: 200px;
+            width: 90%;
+            border: 1px solid black;
+            overflow: scroll;
+            margin-left: 20px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <h2>Your Gold: {{total_gold}}</h2>  <a href="/reset" role="button" class="btn btn-light">Start Over</a><br>
+
+            <div class="box">
+            <h2>Farm</h2>
+            <p>(earns 10-20)</p>
+            <form action="/process_money" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="building" value="farm" />
+                <input type="submit" value="Find Gold!" />
+            </form>
+            <br>
+
+        </div>
+
+        <div class="box">
+            <h2>Cave</h2>
+            <p>(earns 5-10)</p>
+            <form action="/process_money" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="building" value="cave" />
+                <input type="submit" value="Find Gold!" />
+            </form><br>
+        </div>
+
+        <div class="box">
+            <h2>House</h2>
+            <p>(earns 2-5)</p>
+            <form action="/process_money" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="building" value="house" />
+                <input type="submit" value="Find Gold!" />
+            </form><br>
+        </div>
+
+        <div class="box">
+            <h2>Casino</h2>
+            <P>(earns 0-50)</P>
+            <form action="/process_money" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="building" value="casino" />
+                <input type="submit" value="Find Gold!" />
+            </form><br>
+        </div>
+
+<h3>  Activities</h3>
+<div class ="activities">
+    {% for activities in activities %}
+    {{activities|safe}}
+    {%endfor%}
+
+</div>
+
+</body>
+
+</html>
